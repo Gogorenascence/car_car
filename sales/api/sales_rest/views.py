@@ -115,7 +115,7 @@ def api_customer(request, id):
 def api_sales(request, sales_person_id=None):
     if request.method == "GET":
         if sales_person_id is not None:
-            sales = Sale.objects.filter(id=sales_person_id)
+            sales = Sale.objects.filter(sales_person=sales_person_id)
         else:
             sales = Sale.objects.all()
         return JsonResponse(

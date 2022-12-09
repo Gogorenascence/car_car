@@ -31,15 +31,6 @@ class AutomobileVO(models.Model):
 
 class Sale(models.Model):
 
-    # @classmethod
-    # def create(cls, **kwargs):
-    #     customer_name = content["customer_name"]
-    #     kwargs["customer_name"] = Customer.objects.get(customer_name=customer_name)
-    #     vin = content["vin"]
-    #     kwargs["vin"] = AutomobileVO.objects.get(vin=vin)
-    #     sale = cls(**kwargs)
-    #     sale.save()
-    #     return sale
 
     price = models.PositiveSmallIntegerField(null=True, blank=True)
 
