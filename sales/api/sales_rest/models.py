@@ -3,17 +3,26 @@ from django.db import models
 
 class Sales_person(models.Model):
     sales_name = models.CharField(max_length=150)
-    employee = models.CharField(max_length=150, null=True, blank=True)
+    employee_number = models.CharField(
+        max_length=150,
+        null=True, blank=True,
+        unique=True,
+    )
+    def __str__(self):
+        return self.sales_name
 
 
 class Customer(models.Model):
     customer_name = models.CharField(max_length=150)
     address = models.CharField(max_length=150, null=True, blank=True)
-    phone_number = models.models.PhoneNumberField(null=True, blank=True)
-    new = models.BooleanField()
+    phone_number = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.customer_name
 
 
 class AutomobileVO(models.Model):
+    import_href = models.CharField(max_length=200, unique=True)
     vin = models.CharField(max_length=17, unique=True)
 
     def __str__(self):
@@ -21,25 +30,33 @@ class AutomobileVO(models.Model):
 
 
 class Sale(models.Model):
+
+    # @classmethod
+    # def create(cls, **kwargs):
+    #     customer_name = content["customer_name"]
+    #     kwargs["customer_name"] = Customer.objects.get(customer_name=customer_name)
+    #     vin = content["vin"]
+    #     kwargs["vin"] = AutomobileVO.objects.get(vin=vin)
+    #     sale = cls(**kwargs)
+    #     sale.save()
+    #     return sale
+
     price = models.PositiveSmallIntegerField(null=True, blank=True)
 
-    sales_name = models.ForeignKey(
-        Sales_person,
-        related_name="sales",
-        on_delete=models.CASCADE,
-    )
-
-    customer_name = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer,
         related_name="sales",
         on_delete=models.CASCADE,
     )
 
-    vin = models.ForeignKey(
-        AutomobileVO,
+    sales_person = models.ForeignKey(
+        Sales_person,
         related_name="sales",
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.id
+    auto = models.ForeignKey(
+        AutomobileVO,
+        related_name="sales",
+        on_delete=models.CASCADE,
+    )
