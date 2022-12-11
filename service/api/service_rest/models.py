@@ -4,12 +4,7 @@ from django.urls import reverse
 
 class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
-    vin = models.CharField(max_length=17, unique=True)
-
-    def __str__(self):
-        return self.vin
-
-
+    auto_vin = models.CharField(max_length=17, unique=True)
 
 class Technician(models.Model):
     tech_name = models.CharField(max_length=100)
@@ -18,8 +13,8 @@ class Technician(models.Model):
     def __str__(self):
         return self.tech_name
 
-    # def get_api_url(self):
-    #     return reverse("technician", kwargs={"id": self.id})
+    def get_api_url(self):
+        return reverse("technician", kwargs={"id": self.id})
 
 
 class Appointment(models.Model):
@@ -30,11 +25,6 @@ class Appointment(models.Model):
     reason = models.CharField(max_length=100, null=True, blank=True)
     vip_status = models.BooleanField(default=False,null=True, blank=True)
     app_status = models.CharField(default="APPROVED", max_length=10)
-    automobile = models.ForeignKey(
-        AutomobileVO,
-        related_name="appointment",
-        on_delete=models.PROTECT,
-    )
     technician =models.ForeignKey(
         Technician,
         related_name="appointment",

@@ -4,48 +4,48 @@ from django.views.decorators.http import require_http_methods
 import json
 
 from .encoders import (
-    AutomobileVOModelEncoder,
     TechnicianModelEncoder,
     AppointmentModelEncoder,
 )
-from .models import AutomobileVO, Technician, Appointment
-
-
+from .models import Technician, Appointment, AutomobileVO
 @require_http_methods(["GET", "POST"])
-def api_list_appointments(request):
+def api_list_appointments(request, auto_vin=None):
     if request.method == "GET":
-        appointment = Appointment.objects.all()
+        if auto_vin == None:
+            appointments= Appointment.objects.all()
+        else:
+            vin = auto_vin
+            appointments = Appointment.objects.filter(vin=vin)
         return JsonResponse(
-            appointment,
+            {"appointments": appointments},
             encoder=AppointmentModelEncoder,
-            safe=False
         )
-    else: #post/create
+    else:
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            emp_number = content["emp_number"]
-            technician = Technician.objects.get(emp_number=emp_number)
+            technician = content["technician"]
+            technician = Technician.objects.get(id=content["technician"])
             content["technician"] = technician
-            try:
-                app_vin = content["app_vin"]
-                AutomobileVO.objects.get(vin=app_vin)
-                vip_status= True
-                content["vip_staus"]=True
-            except:
-                pass
-            appointment = Appointment.objects.create(**content)
+
+        except Technician.DoesNotExist:
             return JsonResponse(
+                {"message": "Invalid technician"},
+                status=404,
+            )
+        app_vin = content["app_vin"]
+        print(content)
+        autos = AutomobileVO.objects.all()
+        auto_vins = []
+        for auto in autos:
+            auto_vins.append(auto.auto_vin)
+        if app_vin in auto_vins:
+            content["vip_status"] = True
+        appointment = Appointment.objects.create(**content)
+        return JsonResponse(
                 appointment,
                 encoder=AppointmentModelEncoder,
                 safe=False,
             )
-        except:
-            response = JsonResponse(
-                {"message": "Could not create the appointment"}
-            )
-            response.status_code = 400
-            return response
-
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_appointment(request, id):
@@ -64,6 +64,7 @@ def api_show_appointment(request, id):
     elif request.method == "DELETE":
         try:
             appointment = Appointment.objects.get(id=id)
+            print(appointment)
             appointment.delete()
             return JsonResponse(
                 appointment,
@@ -99,6 +100,7 @@ def api_list_technicians(request):
     else:
         try:
             content = json.loads(request.body)
+            print(content)
             technician = Technician.objects.create(**content)
             return JsonResponse(
                 technician,
@@ -107,28 +109,7 @@ def api_list_technicians(request):
             )
         except:
             response = JsonResponse(
-                {"message": "Could not create the manufacturer"}
+                {"message": "Could not create the tech"}
             )
             response.status_code = 400
             return response
-
-
-# @require_http_methods(["PUT"])
-# def api_finished_apt(request, id):
-#     appcomp = Appointment.objects.get(id=id)
-#     appcomp.completed()
-#     return JsonResponse(
-#         appcomp,
-#         encoder=AppointmentModelEncoder,
-#         safe=False,
-#     )
-
-# @require_http_methods(["PUT"])
-# def api_cancelled_apt(requests, id):
-#     appcanc = Appointment.objects.get(id=id)
-#     appcanc.cancelled()
-#     return JsonResponse(
-#         appcanc,
-#         encoder=AppointmentModelEncoder,
-#         safe=False,
-#     )
