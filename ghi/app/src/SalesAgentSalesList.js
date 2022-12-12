@@ -14,26 +14,16 @@ class SalesAgentSalesList extends React.Component {
         const agentsurl = 'http://localhost:8090/api/agents/';
         const agentresponse = await fetch(agentsurl);
         if (agentresponse.ok) {
-            const agentdata = await agentresponse.json();
-            this.setState({ sales_persons: agentdata.sales_persons });
+            const data = await agentresponse.json();
+            this.setState({ sales_persons: data.sales_persons });
         }
         const salesurl = 'http://localhost:8090/api/sales/';
         const salesresponse = await fetch(salesurl);
         if (salesresponse.ok) {
-          const salesdata = await salesresponse.json();
-          this.setState({ sales: salesdata.sales });
+          const data = await salesresponse.json();
+          this.setState({ sales: data.sales });
         }
 
-        console.log(agentdata)
-        console.log(salesdata)
-
-        this.setState({
-            name: sales_person.sales_name,
-            employee_number: sales_person.employee_number
-
-            })
-
-        getData();
     }
 
     handleInputChange = (event) => {
@@ -60,7 +50,6 @@ render(){
 
             <select onChange={this.handleFieldChange}>
                 <option value="name">name</option>
-                <option value="employee_number">number</option>
             </select>
 
             <input
@@ -68,9 +57,7 @@ render(){
                 onChange={this.handleInputChange}
             />
 
-            {this.state.sales}
-
-            <table>
+            <table className="table table-success table-hover table-striped" >
                 <thead>
                     <tr>
                         <th>Agent</th>
@@ -80,14 +67,15 @@ render(){
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map(sale=> {
-                    return(
-                    <tr key={sale.id}>
-                        <td>{sale.sales_person.sales_name}</td>
-                        <td>{sale.customer.customer_name}</td>
-                        <td>{sale.auto.vin}</td>
-                        <td>${sale.price.toLocaleString()}</td>
-                    </tr>
+                    {this.state.sales.filter((sale) => sale.sales_person.sales_name.includes(this.state.filterInput))
+                    .map(sale=> {
+                        return(
+                            <tr key={sale.id}>
+                                <td>{sale.sales_person.sales_name}</td>
+                                <td>{sale.customer.customer_name}</td>
+                                <td>{sale.auto.vin}</td>
+                                <td>${sale.price.toLocaleString()}</td>
+                            </tr>
                     ) })}
                 </tbody>
             </table>
