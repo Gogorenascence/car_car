@@ -36,7 +36,7 @@ urlpatterns = [
         name="api_create_sales",
     ),
     path(
-        "agents/<int:sales_person_id>/sales/",
+        "/sales/",
         api_sales,
         name="api_agent_sales",
     ),

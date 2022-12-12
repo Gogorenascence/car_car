@@ -4,31 +4,59 @@ class SalesAddSale extends React.Component{
     state = {
       price: "",
       customer: "",
+      customers: [],
       sales_person: "",
+      sales_persons: [],
       auto: "",
       autos: [],
     }
 
+    async componentDidMount() {
+      const agentsurl = 'http://localhost:8090/api/agents/';
+      const agentresponse = await fetch(agentsurl);
+      if (agentresponse.ok) {
+          const data = await agentresponse.json();
+          this.setState({ sales_persons: data.sales_persons });
+      }
+      const customersurl = 'http://localhost:8090/api/customers/';
+      const customerresponse = await fetch(customersurl);
+      if (customerresponse.ok) {
+        const data = await customerresponse.json();
+        this.setState({ customers: data.customers });
+      }
+      const autosurl = 'http://localhost:8100/api/automobiles/';
+      const autoresponse = await fetch(autosurl);
+      if (autoresponse.ok) {
+          const data = await autoresponse.json();
+          this.setState({ autos: data.autos });
+      }
+    }
+
+
     handleSubmit = async(event)=> {
       event.preventDefault();
       const data = {...this.state};
+      delete data.sale;
+      delete data.sales_persons;
+      delete data.customers;
+      delete data.autos;
 
-      const salesUrl = 'http://localhost:8090/api/sales/';
+      const saleUrl = 'http://localhost:8090/api/sales/';
       const fetchConfig = {
           method: "post",
           body: JSON.stringify(data),
           headers: {
             "Content-Type": "application/json",
-          },
+         },
+      };
+      const response = await fetch(saleUrl, fetchConfig);
+      if (response.ok) {
+          const cleared = {
+            price: "",
+            customer: "",
+            sales_person: "",
+            auto: "",
         };
-        const response = await fetch(salesUrl, fetchConfig);
-        if (response.ok) {
-            const cleared = {
-              price: "",
-              customer: "",
-              sales_person: "",
-              auto: "",
-          };
 
           this.setState(cleared);
         }
@@ -39,26 +67,7 @@ class SalesAddSale extends React.Component{
         this.setState({[event.target.id]:value})
       }
 
-      async componentDidMount() {
-        const agentsurl = 'http://localhost:8090/api/agents/';
-        const agentresponse = await fetch(agentsurl);
-        if (agentresponse.ok) {
-            const data = await agentresponse.json();
-            this.setState({ sales_persons: data.sales_persons });
-        }
-        const customersurl = 'http://localhost:8090/api/customers/';
-        const customerresponse = await fetch(customersurl);
-        if (customerresponse.ok) {
-          const data = await customerresponse.json();
-          this.setState({ customers: data.customers });
-        }
-        const autosurl = 'http://localhost:8100/api/automobiles/';
-        const autoresponse = await fetch(autosurl);
-        if (autoresponse.ok) {
-            const data = await autoresponse.json();
-            this.setState({ sales_persons: data.autos });
-        }
-    }
+
 
 
 render(){
@@ -74,7 +83,7 @@ render(){
                   <option value="">Choose an agent</option>
                   {this.state.sales_persons?.map(sales_person => {
                     return (
-                      <option key={sales_person.id} value={sales_person.id}>{sales_person.sales_name}</option>
+                      <option key={sales_person.id} value={sales_person.sales_name}>{sales_person.sales_name}</option>
                     )
                   })}
                 </select>
@@ -84,7 +93,7 @@ render(){
                  <option value="">Choose a customer</option>
                   {this.state.customers?.map(customer => {
                     return (
-                      <option key={customer.id} value={customer.customer_name}>{customer.employee_number}</option>
+                      <option key={customer.id} value={customer.customer_name}>{customer.customer_name}</option>
                     )
                   })}
                 </select>
@@ -94,7 +103,7 @@ render(){
                   <option value="">Choose a automobile</option>
                   {this.state.autos?.map(auto => {
                     return (
-                      <option key={auto.id} value={auto.id}>{auto.vin}</option>
+                      <option key={auto.id} value={auto.vin}>{auto.vin}</option>
                     )
                   })}
                 </select>

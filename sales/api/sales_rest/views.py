@@ -162,7 +162,7 @@ def api_sales(request, sales_person_id=None):
 
 
 
-@require_http_methods(["DELETE", "GET", "PUT"])
+@require_http_methods(["DELETE", "GET"])
 def api_sale(request, id):
     if request.method == "GET":
         sale = Sale.objects.get(id=id)
@@ -171,17 +171,6 @@ def api_sale(request, id):
             encoder=SaleDetailEncoder,
             safe=False,
         )
-    elif request.method == "DELETE":
+    else:
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
-    else:
-        content = json.loads(request.body)
-
-        Sale.objects.filter(id=id).update(**content)
-
-        sale = Sale.objects.get(id=id)
-        return JsonResponse(
-            sale,
-            encoder=SaleDetailEncoder,
-            safe=False,
-        )

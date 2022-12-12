@@ -9,6 +9,7 @@ class SalesAddAgent extends React.Component{
     handleSubmit = async(event)=> {
       event.preventDefault();
       const data = {...this.state};
+      delete data.sales_person
 
       const sales_personUrl = 'http://localhost:8090/api/agents/';
       const fetchConfig = {

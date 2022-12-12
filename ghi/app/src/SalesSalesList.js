@@ -17,9 +17,9 @@ function SalesSalesList(){
     return(
         <div>
             <h1>
-                Sales History
+                Sales List
             </h1>
-            <table>
+            <table className="table table-success table-hover table-striped" >
                 <thead>
                     <tr>
                         <th>Agent</th>
