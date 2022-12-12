@@ -22,16 +22,14 @@ class Customer(models.Model):
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True)
-    vin = models.CharField(max_length=17, unique=True)
+    import_href = models.CharField(max_length=200)
+    vin = models.CharField(max_length=17)
 
     def __str__(self):
         return self.vin
 
 
 class Sale(models.Model):
-
-
     price = models.PositiveSmallIntegerField(null=True, blank=True)
 
     customer = models.ForeignKey(

@@ -129,6 +129,7 @@ def api_sales(request, sales_person_id=None):
             sales_name = content["sales_person"]
             sales_person = Sales_person.objects.get(sales_name=sales_name)
             content["sales_person"] = sales_person
+            print(sales_person)
         except Sales_person.DoesNotExist:
             return JsonResponse(
                 {"message": "We do not have an agent with this name"},
