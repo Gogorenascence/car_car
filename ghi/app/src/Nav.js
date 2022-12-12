@@ -5,7 +5,7 @@ function Nav() {
     <nav className="navbar navbar-expand-sm navbar-dark bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          Get Cars or Die Trying
+          Git Cars or Fail Trying
         </NavLink>
         <button
           className="navbar-toggler"
@@ -45,7 +45,7 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/modellist">
+                  <Link className="dropdown-item" to="/InventoryModelList">
                     Model List
                   </Link>
                 </li>
@@ -55,12 +55,12 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/autolist">
+                  <Link className="dropdown-item" to="/InventoryAutomobileList">
                     Automobile List
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/autoform">
+                  <Link className="dropdown-item" to="/InventoryAddAutomobile">
                     Add Automobile To Inventory
                   </Link>
                 </li>
@@ -82,30 +82,30 @@ function Nav() {
                 aria-labelledby="dropdownMenuButton1"
               >
                 <li>
-                  <Link className="dropdown-item" to="/applist">
-                    Scheduled Appointments
+                  <Link className="dropdown-item" to="/ServiceAppointmentList">
+                    Appoointment List
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/appform">
+                  <Link className="dropdown-item" to="/ServiceAddAppointment">
                     Add Appointment
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/apphistory">
+                  <Link className="dropdown-item" to="/ServiceAppointmentHistory">
                     Appointment History
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/techlist">
-                    Technician List
+                  <Link className="dropdown-item" to="/ServiceAddTech">
+                    Add Technician
                   </Link>
                 </li>
 
               </ul>
             </div>
 
-            <div className="dropdown mx-1">
+            {/* <div className="dropdown mx-1">
               <button
                 className="btn btn-success dropdown-toggle"
                 type="button"
@@ -114,21 +114,10 @@ function Nav() {
                 aria-expanded="false"
               >
                 Sales
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton2"
-              >
-                <li>
-                  <Link className="dropdown-item" to="/saleslist">
-                    History
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
+              </button> */}
 
           </ul>
+
         </div>
       </div>
     </nav>
