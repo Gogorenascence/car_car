@@ -5,11 +5,10 @@ function Nav() {
     <nav className="navbar navbar-expand-sm navbar-dark bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-<<<<<<< HEAD
-          CarCar
-=======
+
+
           Git Cars or Fail Trying
->>>>>>> origin
+
         </NavLink>
         <button
           className="navbar-toggler"
@@ -63,11 +62,15 @@ function Nav() {
                     Automobile List
                   </Link>
                 </li>
+<<<<<<< HEAD
                 <li>
                   <Link className="dropdown-item" to="/InventoryAddAutomobile">
                     Add Automobile To Inventory
                   </Link>
                 </li>
+=======
+
+>>>>>>> 52c8bab0eb678694bfca480faca54d460b31c398
               </ul>
             </div>
 
