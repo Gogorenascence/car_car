@@ -59,11 +59,7 @@ function Nav() {
                     Automobile List
                   </Link>
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/InventoryAddAutomobile">
-                    Add Automobile To Inventory
-                  </Link>
-                </li>
+
               </ul>
             </div>
 
@@ -114,8 +110,38 @@ function Nav() {
                 aria-expanded="false"
               >
                 Sales
-              </button> */}
-
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton2"
+              >
+                <li>
+                  <Link className="dropdown-item" to="/SalesAddAgent">
+                    Add Agent
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/SalesAgentSalesList">
+                    Agent Sales History
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/SalesAddCustomer">
+                    Add Customer
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/SalesAddSale">
+                    Add Sale
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/SalesSalesList">
+                    Sales list
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </ul>
 
         </div>
