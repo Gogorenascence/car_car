@@ -19,13 +19,10 @@ def get_automobiles():
             import_href = automobile["href"],
             defaults={"vin": automobile["vin"]},
         )
-        print(AutomobileVO.objects.all())
-
 
 def poll():
     while True:
-        print('Service poller polling for data')
-        response = requests.get("http://inventory-api:8000/api/automobiles/")
+        response = requests.get("http://inventory-api:8100/api/automobiles/")
         content = json.loads(response.content)
         try:
             get_automobiles()
@@ -35,4 +32,4 @@ def poll():
 
 
 if __name__ == "__main__":
-    poll(5)
+    poll()
