@@ -29,6 +29,9 @@ def get_automobiles():
 def poll():
     while True:
         print('Sales poller polling for data')
+        response = requests.get("http://inventory-api:8000/api/automobiles/")
+        content = json.loads(response.content)
+        print(content["autos"])
         try:
             get_automobiles()
         except Exception as e:

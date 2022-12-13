@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import InventoryAddManufacturer from "./InventoryAddManufacturer";
+import InventoryManufacturerList from "./InventoryManufacturerList";
 
 // This is showing in the BrowserRouter,
 // the inputs are working and the drop down is showing.
@@ -11,13 +11,12 @@ class InventoryAddModel extends React.Component{
     state = {
       name: "",
       picture_url: "",
-      manufacturer_id: "",
-      manufacturer_ids: [],
+      manufacturer: "",
+      manufacturers: [],
     }
 
   async componentDidMount() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers";
-
     const manResponse = await fetch(manufacturerUrl);
 
     if (manResponse.ok) {
@@ -30,29 +29,30 @@ class InventoryAddModel extends React.Component{
     handleSubmit = async(event)=> {
       event.preventDefault();
       const data = {...this.state};
-    //   delete data.sales_persons;
+      delete data.manufacturers;
 
       const modelUrl = 'http://localhost:8100/api/models/';
       const fetchConfig = {
           method: "post",
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            "name": this.state.name,
+            "picture_url": this.state.picture_url,
+            "manufacturer_id": this.state.manufacturer,
+          }),
           headers: {
             "Content-Type": "application/json",
           },
         };
         const response = await fetch(modelUrl, fetchConfig);
         if (response.ok) {
-            const newModel = await response.json();
             const cleared = {
               name: "",
               picture_url: "",
-              manufacturer_id: "",
+              manufacturer: "",
             };
             this.setState(cleared);
           }
     };
-        //
-        // }
 
 
       handleInputChange = (event)=> {
@@ -61,7 +61,6 @@ class InventoryAddModel extends React.Component{
       }
 
 render(){
-
     return (
       <div className="row">
         <div className="offset-3 col-6">
@@ -91,14 +90,15 @@ render(){
                 className="form-control" />
                 <label htmlFor="picture_url">Add A Picture</label>
               </div>
+
               <div className="mb-3">
                 <select
-                onChange={this.handleManufacturerChange}
-                required id="manufacturer_id"
-                name="manufacturer_id"
+                onChange={this.handleInputChange}
+                required id="manufacturer"
+                name="manufacturer"
                 className="form-select">
-                <option value="">Choose a manufacturer</option>
-                  {this.state.manufacturers?.map(manufacturer => {
+                <option value="">Choose A Manufacturer</option>
+                  {this.state.manufacturers.map(manufacturer => {
                     return (
                         <option key = {manufacturer.id} value={manufacturer.id}>
                           {manufacturer.name}

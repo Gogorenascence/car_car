@@ -16,10 +16,10 @@ function InventoryManufacturerList(){
 
     return(
         <div>
-            <h1>
+            <h1 >
                 Manufacturers In Inventory
             </h1>
-            <table>
+            <table className="table table-success table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
