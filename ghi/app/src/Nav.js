@@ -100,8 +100,7 @@ function Nav() {
 
               </ul>
             </div>
-
-            {/* <div className="dropdown mx-1">
+            <div className="dropdown mx-1">
               <button
                 className="btn btn-success dropdown-toggle"
                 type="button"
