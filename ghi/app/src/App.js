@@ -13,6 +13,12 @@ import SalesAgentSalesList from './SalesAgentSalesList';
 import SalesAddSale from './SalesAddSale';
 import SalesSalesList from './SalesSalesList';
 import SalesAddCustomer from './SalesAddCustomer';
+import InventoryAddAutomobile from './InventoryAddAutomobile';
+import InventoryAutomobileList from './InventoryAutomobileList';
+import ServiceAddTech from './ServiceAddTech';
+import ServiceAddAppointment from './ServiceAddAppointment';
+import ServiceAppointmentHistory from './ServiceAppointmentHistory';
+import ServiceAppointmentList from './ServiceAppointmentList';
 
 
 function App() {
@@ -37,9 +43,20 @@ function App() {
           <Route path="/SalesAddSale" element={<SalesAddSale/>} />
           <Route path="/SalesSalesList" element={<SalesSalesList/>} />
           <Route path="/SalesAddCustomer" element={<SalesAddCustomer/>} />
+          <Route path="/InventoryAddManufacturer" element={<InventoryAddManufacturer />} />
+          <Route path="/InventoryManufacturerList" element={<InventoryManufacturerList />} />
+          <Route path="/InventoryAddModel" element={<InventoryAddModel />} />
+          <Route path="/InventoryModelList" element={<InventoryModelList />} />
+          <Route path="/InventoryAddAutomobile" element={<InventoryAddAutomobile />} />
+          <Route path="/InventoryAutomobileList" element={<InventoryAutomobileList />} />
+          <Route path="/ServiceAddTech" element={<ServiceAddTech />} />
+          <Route path="/ServiceAddAppointment" element={<ServiceAddAppointment />} />
+          <Route path="/ServiceAppointmentHistory" element={<ServiceAppointmentHistory />} />
+          <Route path="/ServiceAppointmentList" element={<ServiceAppointmentList />} />
         </Routes>
       </div>
     </BrowserRouter>
+
   );
 }
 

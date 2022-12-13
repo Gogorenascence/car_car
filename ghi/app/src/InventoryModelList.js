@@ -20,7 +20,7 @@ function InventoryModelList(){
             <h1>
                 Models In Inventory
             </h1>
-            <table>
+            <table className="table table-success table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>

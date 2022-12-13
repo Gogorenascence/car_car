@@ -6,11 +6,9 @@ from .models import Manufacturer, VehicleModel, Automobile
 class AutomobileAdmin(admin.ModelAdmin):
     pass
 
-
 @admin.register(Manufacturer)
 class ManufacturerAdmin(admin.ModelAdmin):
     pass
-
 
 @admin.register(VehicleModel)
 class VehicleModelAdmin(admin.ModelAdmin):

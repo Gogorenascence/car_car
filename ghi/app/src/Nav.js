@@ -5,7 +5,11 @@ function Nav() {
     <nav className="navbar navbar-expand-sm navbar-dark bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
+<<<<<<< HEAD
           CarCar
+=======
+          Git Cars or Fail Trying
+>>>>>>> origin
         </NavLink>
         <button
           className="navbar-toggler"
@@ -35,18 +39,13 @@ function Nav() {
                 aria-labelledby="dropdownMenuButton1"
               >
                 <li>
-                  <Link className="dropdown-item" to="/InventoryAddManufacturer">
-                    Add Manufacturer
-                  </Link>
-                </li>
-                <li>
                   <Link className="dropdown-item" to="/InventoryManufacturerList">
                     Manufacturer List
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/InventoryAddModel">
-                    Add Model
+                  <Link className="dropdown-item" to="/InventoryAddManufacturer">
+                    Add Manufacturer
                   </Link>
                 </li>
                 <li>
@@ -55,8 +54,8 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/InventoryAddAutomobile">
-                    Add Automobile To Inventory
+                  <Link className="dropdown-item" to="/InventoryAddModel">
+                    Add Model
                   </Link>
                 </li>
                 <li>
@@ -64,7 +63,11 @@ function Nav() {
                     Automobile List
                   </Link>
                 </li>
-
+                <li>
+                  <Link className="dropdown-item" to="/InventoryAddAutomobile">
+                    Add Automobile To Inventory
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -83,29 +86,30 @@ function Nav() {
                 aria-labelledby="dropdownMenuButton1"
               >
                 <li>
-                  <Link className="dropdown-item" to="/applist">
-                    Scheduled Appointments
+                  <Link className="dropdown-item" to="/ServiceAppointmentList">
+                    Appoointment List
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/appform">
+                  <Link className="dropdown-item" to="/ServiceAddAppointment">
                     Add Appointment
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/apphistory">
+                  <Link className="dropdown-item" to="/ServiceAppointmentHistory">
                     Appointment History
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/techlist">
-                    Technician List
+                  <Link className="dropdown-item" to="/ServiceAddTech">
+                    Add Technician
                   </Link>
                 </li>
+
               </ul>
             </div>
 
-            <div className="dropdown mx-1">
+            {/* <div className="dropdown mx-1">
               <button
                 className="btn btn-success dropdown-toggle"
                 type="button"
@@ -147,6 +151,7 @@ function Nav() {
               </ul>
             </div>
           </ul>
+
         </div>
       </div>
     </nav>
